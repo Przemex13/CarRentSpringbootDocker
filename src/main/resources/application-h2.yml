@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: CarRentSpringbootDocker
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  # Ustawienia bazy H2
+  h2:
+    console:
+      enabled: true
+      path: /console
+  # Ustawienia JPA
+  jpa:
+      hibernate:
+        ddl-auto: none
+        database-platform: org.hibernate.dialect.H2Dialect
+      show-sql: true
+  # Flyway konfiguracja
+  flyway:
+    enabled: true
+    locations:
+        - classpath:db.migration-h2
+#    locations: classpath:db.migration, db.migration/h2test
