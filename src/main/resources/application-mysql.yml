@@ -2,7 +2,7 @@ spring:
   application:
     name: CarRentSpringbootDocker
   datasource:
-    url: jdbc:mysql://localhost:3311/carRentDb
+    url: jdbc:mysql://mysqlContainer:3306/carRentDb
     username: root
     password: haslo
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,7 +12,7 @@ spring:
       hibernate:
         ddl-auto: none
       show-sql: true
-#      database-platform: org.hibernate.dialect.MySQL57Dialect
+      database-platform: org.hibernate.dialect.MySQLDialect
   # Flyway konfiguracja
   flyway:
     enabled: true

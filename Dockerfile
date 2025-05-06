@@ -1,18 +1,27 @@
+# Etap 1: Budowanie aplikacji
 FROM maven:3.9.5-eclipse-temurin-17 AS build
 
+# Ustaw katalog roboczy w kontenerze
 WORKDIR /app
 
+# Skopiuj pliki projektu Maven
 COPY pom.xml .
 COPY src ./src
 
-RUN mvn clean package
+# Uruchom budowanie projektu (tworzy plik .jar)
+RUN mvn clean package -DskipTests
 
-#FROM openjdk:17-jdk-slim
+# Etap 2: Tworzenie obrazu aplikacji
+FROM eclipse-temurin:17-jdk-alpine
 
-#VOLUME /tmp
+# Katalog roboczy w finalnym obrazie
+WORKDIR /app
 
-#ARG JAR_FILE=target/blog-0.0.1-SNAPSHOT.jar
+# Skopiuj zbudowany plik .jar z poprzedniego etapu
+COPY --from=build /app/target/*.jar app.jar
 
-#COPY --from=build /app/${JAR_FILE} app.jar
+# Wystaw domyślny port (opcjonalnie)
+EXPOSE 8080
 
-#ENTRYPOINT ["java", "-jar","/app.jar"]
+# Komenda startowa
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]

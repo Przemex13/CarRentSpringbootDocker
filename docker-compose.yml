@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysqlContainer
+    environment:
+      MYSQL_DATABASE: carRentDb
+      MYSQL_ROOT_PASSWORD: haslo
+    ports:
+      - '3311:3306' # Host port : container port
+#    volumes:
+#      - mysql-data:/var/lib/mysql
+    networks:
+      - springboot-mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-phaslo"]
+      interval: 10s
+      retries: 3
+      start_period: 10s
+      timeout: 10s
+
+  app:
+    build: .
+    container_name: springboot
+    ports:
+      - '8090:8080' # Host port : container port
+#    environment:
+
+    depends_on:
+       mysql:
+        condition: service_healthy
+    networks:
+      - springboot-mysql
+
+
+networks:
+  springboot-mysql:
+    driver: bridge
