@@ -2,7 +2,6 @@ spring:
   application:
     name: CarRentSpringbootDocker
   datasource:
-
     url: jdbc:mysql://mysqlContainer:3306/carRentDb
     username: root
     password: haslo

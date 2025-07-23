@@ -39,7 +39,7 @@ public class ProfileLogger implements ApplicationRunner {
                 logger.info("Zaczytano parametry testowe!");
             }
             if(Arrays.stream(activeProfile)
-                    .anyMatch(str -> str.equals("mysq"))){
+                    .anyMatch(str -> str.equals("mysql"))){
                 logger.info("Zaczytano parametry produkcyjne!");
             }
 

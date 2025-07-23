@@ -5,7 +5,7 @@ services:
     container_name: mysqlContainer
     environment:
       MYSQL_DATABASE: carRentDb
-      MYSQL_ROOT_PASSWORD: haslo
+      MYSQL_ROOT_PASSWORDA: haslo
     ports:
       - '3311:3306' # Host port : container port
 #    volumes:
